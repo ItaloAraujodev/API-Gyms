@@ -1,5 +1,9 @@
 {
     "extends": [
         "@rocketseat/eslint-config/node" //Tem em react tb
-    ]
+    ],
+
+    "rules": {
+        "camelcase": "off"
+    }
 }
