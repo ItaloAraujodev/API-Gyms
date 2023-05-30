@@ -5,6 +5,7 @@ import { z } from 'zod'
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'), // Essa variavel só pode ter esses tipos
+  JWT_SECRET: z.string(),
   PORT: z.coerce.number().default(3333), // Converte um valor para um numero
 })
 
