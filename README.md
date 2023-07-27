@@ -30,3 +30,7 @@ GymPass style app.
 - [x] Os dados da aplicação precisam estar persistidos em um banco PostgreSQL
 - [ ] Todas listas de dados precisam estar paginadas com 20 itens por página;
 - [ ] O usuário deve ser identificado por um JWT ( JSON WebToken)
+
+
+## Anotações:
+- npm i -D npm-run-all ( server para executar scripts dentro do package SCRIPTS e faz uma conversão para funcional em qualquer sistema operacional que a pessoa ta ) Exp: package.json > scripts > pretest:e2e
