@@ -1,33 +1,33 @@
-import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-ins-repository'
-import { GetUserMetricsUseCase } from './get.user-metrics'
-import { beforeEach, expect, describe, it } from 'vitest'
+import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-ins-repository";
+import { GetUserMetricsUseCase } from "./get.user-metrics";
+import { beforeEach, expect, describe, it } from "vitest";
 
-let checkInsRepository: InMemoryCheckInsRepository
-let sut: GetUserMetricsUseCase
+let checkInsRepository: InMemoryCheckInsRepository;
+let sut: GetUserMetricsUseCase;
 
-describe('Get User Metrics Use Case', () => {
+describe("Get User Metrics Use Case", () => {
   // beforeEach server para executar o codigo antes de cada testes
 
   beforeEach(async () => {
-    checkInsRepository = new InMemoryCheckInsRepository()
-    sut = new GetUserMetricsUseCase(checkInsRepository)
-  })
+    checkInsRepository = new InMemoryCheckInsRepository();
+    sut = new GetUserMetricsUseCase(checkInsRepository);
+  });
 
-  it('Should be able to get check-ins count from metrics', async () => {
+  it("Should be able to get check-ins count from metrics", async () => {
     await checkInsRepository.create({
-      gym_id: 'gym-01',
-      user_id: 'user-01',
-    })
+      gym_id: "gym-01",
+      user_id: "user-01",
+    });
 
     await checkInsRepository.create({
-      gym_id: 'gym-02',
-      user_id: 'user-01',
-    })
+      gym_id: "gym-02",
+      user_id: "user-01",
+    });
 
     const { checkInsCount } = await sut.execute({
-      userId: 'user-01',
-    })
+      userId: "user-01",
+    });
 
-    expect(checkInsCount).toEqual(2)
-  })
-})
+    expect(checkInsCount).toEqual(2);
+  });
+});
