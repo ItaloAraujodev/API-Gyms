@@ -31,7 +31,25 @@ export async function authenticate(
       }
     );
 
-    return reply.status(200).send({ token });
+    const refreshToken = await reply.jwtSign(
+      {},
+      {
+        sign: {
+          sub: user.id,
+          expiresIn: "7d",
+        },
+      }
+    );
+
+    return reply
+      .setCookie("refreshToken", refreshToken, {
+        path: "/", // Todo o back end pode ler esse valor do cokkie
+        secure: true, // Vai ser criptografado atraves do HTTPS, independete se ta usando HTTPs ou não
+        sameSite: true, // Esse cookie so vai ser acessado no mesmo dominimo do site
+        httpOnly: true, // Vai ser acessado só pelo backEnd e não pelo front end
+      })
+      .status(200)
+      .send({ token });
   } catch (error) {
     if (error instanceof InvalidCredentialError) {
       return reply.status(400).send({ message: error.message });
