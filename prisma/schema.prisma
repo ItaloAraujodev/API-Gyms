@@ -13,14 +13,19 @@ datasource db {
 // 1 @ configurando apenas aquele campo
 // 2 @@ - configurando a tabela
 
-model User {
-  id            String   @id @default(uuid()) //Toda tabela precisa de um @id
-  name          String
-  email         String   @unique
-  password_hash String
-  created_at    DateTime @default(now())
+enum Role {
+  ADMIN
+  MEMBER
+}
 
-  checkIns CheckIn[] //[] Significa muitos
+model User {
+  id            String    @id @default(uuid()) //Toda tabela precisa de um @id
+  name          String
+  email         String    @unique
+  password_hash String
+  created_at    DateTime  @default(now())
+  role          Role      @default(MEMBER)
+  checkIns      CheckIn[] //[] Significa muitos
 
   @@map("user") // Modificando o nome da tabela
 }
